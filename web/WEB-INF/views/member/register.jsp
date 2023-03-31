@@ -29,19 +29,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col justify-content-center">
                             <label for="input-password">비밀번호</label>
                             <input type="password" name="password" class="form-control" id="input-password" style="width: 500px; height: 50px; margin-bottom: 20px">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col justify-content-center">
                             <label for="input-nickname">닉네임</label>
                             <input type="text" name="nickname" class="form-control" id="input-nickname" style="width: 500px; height: 50px; margin-bottom: 20px">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col justify-content-center">
                             <button class="btn btn-primary" type="submit" style="width: 500px; height: 50px; margin-bottom: 20px; background-color: #fe62b6; border-color: #fe62b6">회원가입</button>
                         </div>
                     </div>

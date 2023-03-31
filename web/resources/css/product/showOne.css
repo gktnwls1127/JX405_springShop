@@ -1,0 +1,12 @@
+.accordion-button:not(.collapsed) {
+    --bs-accordion-active-bg: #EDA9D3;
+    --bs-accordion-active-color: #ff009c;
+}
+
+.productImg{
+    width: 500px !important;
+}
+
+.productPrice{
+    font-size: 20px;
+}

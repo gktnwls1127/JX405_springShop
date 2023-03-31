@@ -1,4 +1,4 @@
-<%@ page import="com.bit.spring_shop.model.MemberDTO" %>
+<%@ page import="com.bit.shop.model.MemberDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -80,7 +80,7 @@
                         </a>
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="/member/myPage/${logIn.id}">MyPage</a></li>
-                            <li><a class="dropdown-item" href="/member/orderList">OrderList</a></li>
+                            <li><a class="dropdown-item" href="/member/orderList/${logIn.id}">OrderList</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -98,8 +98,9 @@
                         </a>
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="/member/myPage/${logIn.id}">MyPage</a></li>
-                            <li><a class="dropdown-item" href="/member/orderList">OrderList</a></li>
-                            <li><a class="dropdown-item" href="/member/productList">ProductList</a></li>
+                            <li><a class="dropdown-item" href="/member/orderList/${logIn.id}">OrderList</a></li>
+                            <li><a class="dropdown-item" href="/product/productList/${logIn.id}/1">ProductList</a></li>
+                            <li><a class="dropdown-item" href="/product/upsert">Product Register</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -109,7 +110,8 @@
                 </c:if>
                 <c:if test="${logIn.role eq 'ROLE_ADMIN'}">
                     <div class="dropdown-center text-end m-2" style="padding-top: 3px">
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
+                           data-bs-toggle="dropdown"
                            aria-expanded="false" data-bs-offset="10,20">
                             <img src="/resources/images/basicprofile.jpg" alt="mdo" width="24" height="24"
                                  class="rounded-circle" border="2px" style="border-color: #fe62b6">
@@ -130,12 +132,25 @@
 
         </c:choose>
 
+        <!-- 좋아요 -->
+        <a href="/like/showLike/${logIn.id}/1" class="m-3" style="border: none; background-color: white; color: #fe62b6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+            </svg>
+        </a>
+
 
         <%-- 카트--%>
-        <a href="/member/cart" class="m-3" style="border: none; background-color: white; color: #fe62b6">
+        <a href="/cart/showCart/${logIn.id}" class="m-3" style="border: none; background-color: white; color: #fe62b6">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart"
                  viewBox="0 0 16 16">
                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                <%--                <span class="position-absolute top-5 start-80 translate-middle badge rounded-pill bg-danger">--%>
+                <%--                99+--%>
+                <%--                <span class="visually-hidden">unread messages</span>--%>
+                </span>
             </svg>
         </a>
     </div>
@@ -149,10 +164,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form class="d-flex">
-                <input class="form-control me-sm-2" type="search" placeholder="Search">
+            <form class="d-flex" action="/product/search" method="get">
+                <input class="form-control me-sm-2" type="search" placeholder="Search" name="keyword">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit"
-                        style="background-color: #fe62b6 !important;">Search
+                        style="background-color: #fe62b6 !important;" onclick="location.href='/product/searchPage'">
+                    Search
                 </button>
             </form>
         </div>

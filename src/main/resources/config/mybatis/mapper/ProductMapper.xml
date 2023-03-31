@@ -20,10 +20,27 @@
         ORDER BY sold DESC
         LIMIT 10
     </select>
+    <select id="selectSeller" resultType="productDTO" parameterType="hashmap">
+        SELECT * FROM product
+        INNER JOIN category
+        ON product.categoryId = category.id
+        WHERE sellerId = #{id}
+        ORDER BY product.id DESC
+        LIMIT ${start}, ${size}
+    </select>
     <select id="recommendItems" resultType="productDTO">
         SELECT * FROM product
         ORDER BY RAND()
         LIMIT 16
+    </select>
+    <select id="searchItems" parameterType="map" resultType="productDTO">
+        SELECT * FROM product
+        INNER JOIN category
+        ON product.categoryId = category.id
+        WHERE name LIKE concat('%', #{keyword}, '%')
+        OR
+        description LIKE concat('%', #{keyword}, '%')
+        ORDER BY product.id DESC
     </select>
     <select id="categoryAll" resultType="productDTO">
         SELECT * FROM product
@@ -37,8 +54,8 @@
         WHERE product.id = #{id}
     </select>
     <insert id="insert" parameterType="productDTO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO product(name, description, sellerId, entry_date, modify_date)
-        VALUES (#{name}, #{description}, #{sellerId}, NOW(), NOW())
+        INSERT INTO product(name, description, sellerId, image, categoryId, price, entry_date, modify_date)
+        VALUES (#{name}, #{description}, #{sellerId}, #{image}, #{categoryId}, #{price}, NOW(), NOW())
     </insert>
     <update id="update" parameterType="productDTO">
         UPDATE product
@@ -51,9 +68,10 @@
         DELETE FROM product
         WHERE id = #{id}
     </delete>
-    <select id="count" resultType="int">
+    <select id="count" resultType="int" parameterType="int">
         SELECT COUNT(*)
         FROM product
+        WHERE sellerId = #{id}
     </select>
     <select id="selectByKeyword" parameterType="map" resultMap="product">
         SELECT * FROM product

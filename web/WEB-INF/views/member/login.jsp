@@ -10,8 +10,8 @@
         <div class="row justify-content-center">
             <h1 class="mb-5 text-center">LUMINOUS LOGIN</h1>
             <hr/>
-            <div class="mt-5 mb-5 col-6 align-items-center justify-content-center">
-                <form method="post" action="/member/auth">
+            <div class="mt-5 mb-5 col-5 align-items-center justify-content-center">
+                <form method="post" action="/member/auth" >
                     <div class="row">
                         <div class="col justify-content-center">
                             <label for="input-username">아이디</label>
@@ -33,12 +33,12 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col justify-content-center">
-                            <button class="btn btn-outline-info" onclick="location.href='/member/register'" style="width: 500px; height: 50px; color: #fe62b6; border-color: #fe62b6">회원가입
-                                하기</button>
-                        </div>
-                    </div>
+<%--                    <div class="row">--%>
+<%--                        <div class="col justify-content-center">--%>
+<%--                            <button class="btn btn-outline-info" onclick="location.href='/member/register'" style="width: 500px; height: 50px; color: #fe62b6; border-color: #fe62b6">회원가입--%>
+<%--                                하기</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </form>
                 ${message}
             </div>

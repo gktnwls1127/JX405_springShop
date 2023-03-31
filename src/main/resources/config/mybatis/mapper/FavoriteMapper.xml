@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.FavoriteMapper">
+    <select id="findLike" resultType="favoriteDTO" parameterType="hashmap">
+        SELECT * FROM favorite
+        WHERE productId = #{pId} and memberId = #{mId}
+    </select>
+    <select id="memberLikeAll" resultType="favoriteDTO" parameterType="hashmap">
+        SELECT * FROM favorite
+        INNER JOIN product
+        ON favorite.productId = product.id
+        INNER JOIN category
+        ON product.categoryId = category.id
+        WHERE memberId = #{id}
+        ORDER BY favorite.id DESC
+        LIMIT ${start}, ${size}
+    </select>
+    <select id="count" resultType="int" parameterType="int">
+        SELECT COUNT(*)
+        FROM favorite
+        WHERE memberId = #{id}
+    </select>
+    <insert id="likeUp" parameterType="favoriteDTO">
+        INSERT INTO favorite (memberId, productId)
+        VALUES(#{memberId}, #{productId})
+    </insert>
+    <delete id="likeDelete" parameterType="int">
+        DELETE FROM favorite
+        WHERE id = #{id}
+    </delete>
+</mapper>

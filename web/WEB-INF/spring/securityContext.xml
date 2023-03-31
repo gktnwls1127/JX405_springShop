@@ -13,7 +13,7 @@
         <security:intercept-url pattern="/member/register" access="permitAll()"/>
         <security:intercept-url pattern="/member/auth" access="permitAll()"/>
         <security:intercept-url pattern="/member/logout" access="isAuthenticated()"/>
-        <security:intercept-url pattern="/**" access="permitAll()"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:form-login
                 username-parameter="username"
                 password-parameter="password"
@@ -28,6 +28,6 @@
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="memberService"/>
     </security:authentication-manager>
-    <context:component-scan base-package="com.bit.spring_shop.service"/>
-    <context:component-scan base-package="com.bit.spring_shop.handler"/>
+    <context:component-scan base-package="com.bit.shop.service"/>
+    <context:component-scan base-package="com.bit.shop.handler"/>
 </beans>
