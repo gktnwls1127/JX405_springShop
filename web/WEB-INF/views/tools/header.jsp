@@ -80,7 +80,7 @@
                         </a>
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="/member/myPage/${logIn.id}">MyPage</a></li>
-                            <li><a class="dropdown-item" href="/member/orderList/${logIn.id}">OrderList</a></li>
+                            <li><a class="dropdown-item" href="/order/orderList/${logIn.id}/1">OrderList</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -98,7 +98,7 @@
                         </a>
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="/member/myPage/${logIn.id}">MyPage</a></li>
-                            <li><a class="dropdown-item" href="/member/orderList/${logIn.id}">OrderList</a></li>
+                            <li><a class="dropdown-item" href="/order/sellerOrder/${logIn.id}/1">OrderList</a></li>
                             <li><a class="dropdown-item" href="/product/productList/${logIn.id}/1">ProductList</a></li>
                             <li><a class="dropdown-item" href="/product/upsert">Product Register</a></li>
                             <li>
@@ -118,7 +118,7 @@
                         </a>
                         <ul class="dropdown-menu text-small">
                             <li><a class="dropdown-item" href="/member/myPage/${logIn.id}">MyPage</a></li>
-                            <li><a class="dropdown-item" href="/admin/adminPage">adminPage</a></li>
+                            <li><a class="dropdown-item" href="/admin/dashBoard">adminPage</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -164,10 +164,10 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <form class="d-flex" action="/product/search" method="get">
+            <form class="d-flex" action="/product/searchPage" method="get">
                 <input class="form-control me-sm-2" type="search" placeholder="Search" name="keyword">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit"
-                        style="background-color: #fe62b6 !important;" onclick="location.href='/product/searchPage'">
+                        style="background-color: #fe62b6 !important;">
                     Search
                 </button>
             </form>

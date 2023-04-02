@@ -38,13 +38,13 @@
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary" onclick="location.href='/member/update/${result.id}'" style="width: 440px; height: 50px; margin-bottom: 20px; background-color: #fe62b6; border-color: #fe62b6">회원정보 수정</button>
+                    <div class="col-5">
+                        <button class="btn btn-primary" onclick="location.href='/member/update/${result.id}'" style="width: 500px; height: 50px; margin-bottom: 20px; background-color: #fe62b6; border-color: #fe62b6">회원정보 수정</button>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
-                        <button class="btn btn-outline-primary"  onclick="location.href='/member/delete/${result.id}'" style="width: 440px; height: 50px; margin-bottom: 20px; color: #fe62b6; border-color: #fe62b6">회원정보 탈퇴</button>
+                    <div class="col-5">
+                        <button class="btn btn-outline-primary"  onclick="location.href='/member/delete/${result.id}'" style="width: 500px; height: 50px; margin-bottom: 20px; color: #fe62b6; border-color: #fe62b6">회원정보 탈퇴</button>
                     </div>
                 </div>
             </div>

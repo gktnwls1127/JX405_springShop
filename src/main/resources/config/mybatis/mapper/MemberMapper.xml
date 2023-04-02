@@ -17,12 +17,17 @@
         INSERT INTO member(username, password, nickname)
         VALUES(#{username}, #{password}, #{nickname})
     </insert>
-    <select id="selectAll" resultType="memberDTO">
+    <select id="selectAll" resultType="memberDTO" parameterType="hashmap">
         SELECT * FROM member
+        WHERE id != 1
+        LIMIT ${start}, ${size}
     </select>
     <select id="selectOne" resultType="memberDTO" parameterType="int">
         SELECT * FROM member
         WHERE id = #{id}
+    </select>
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM member
     </select>
     <update id="update" parameterType="memberDTO">
         UPDATE member

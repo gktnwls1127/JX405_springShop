@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BuyingMapper">
+    <select id="selectAll" resultType="buyingDTO">
+        SELECT * FROM buying
+        INNER JOIN cart
+        ON cart.id = buying.cartId
+        INNER JOIN product
+        ON buying.productId = product.id
+        INNER JOIN member
+        ON member.id = cart.memberId
+        ORDER BY buying.entry_date DESC
+    </select>
+    <select id="orderAll" resultType="buyingDTO" parameterType="hashmap">
+        SELECT * FROM buying
+        INNER JOIN product
+        ON buying.productId = product.id
+        WHERE memberId = #{id}
+        LIMIT ${start}, ${size}
+    </select>
+    <select id="sellerAll" resultType="buyingDTO" parameterType="hashmap">
+        SELECT * FROM buying
+        INNER JOIN cart
+        ON cart.id = buying.cartId
+        INNER JOIN product
+        ON buying.productId = product.id
+        INNER JOIN member
+        ON member.id = cart.memberId
+        WHERE product.sellerId = #{id}
+        LIMIT ${start}, ${size}
+    </select>
+    <insert id="orderInsert" parameterType="buyingDTO">
+        INSERT INTO buying (memberId, cartId, totalPrice, entry_date)
+        VALUES(#{memberId}, #{cartId}, #{totalPrice}, NOW())
+    </insert>
+    <select id="count" resultType="int" parameterType="int">
+        SELECT COUNT(*)
+        FROM buying
+        WHERE memberId = #{id}
+    </select>
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM buying
+    </select>
+    <select id="countSeller" resultType="int" parameterType="int">
+        SELECT COUNT(*)
+        FROM buying
+        INNER JOIN product
+        ON buying.productId = product.id
+        WHERE product.sellerId = #{id}
+    </select>
+    <select id="dateCount" resultType="int" parameterType="hashmap">
+        SELECT COUNT(*)
+        FROM buying
+        WHERE memberId = #{id} AND entry_date = #{entryDate}
+        GROUP BY entry_date
+    </select>
+    <select id="dateCountSeller" resultType="int" parameterType="hashmap">
+        SELECT COUNT(*)
+        FROM buying
+        INNER JOIN cart
+        ON cart.id = buying.cartId
+        INNER JOIN product
+        ON product.id = cart.productId
+        WHERE sellerId = #{id} AND buying.entry_date = #{entryDate}
+        GROUP BY buying.entry_date, buying.memberId
+    </select>
+    <insert id="insert" parameterType="buyingDTO">
+        INSERT INTO buying (memberId, cartId, productId, totalPrice, processing, entry_date)
+        VALUES(#{memberId}, #{cartId}, #{productId}, #{totalPrice},'주문완료', NOW())
+    </insert>
+    <update id="update" parameterType="buyingDTO">
+        UPDATE buying
+        SET processing = #{processing}
+        WHERE id = #{id}
+    </update>
+    <select id="selectOne" resultType="buyingDTO" parameterType="int">
+        SELECT * FROM buying
+        WHERE id = #{id}
+    </select>
+</mapper>

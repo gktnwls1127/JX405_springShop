@@ -25,8 +25,14 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="input-password">비밀번호</label>
-                            <input type="password" name="password" class="form-control" id="input-password" style="height: 50px; margin-bottom: 20px" value="${result.password}">
+                            <label for="input-password">새 비밀번호</label>
+                            <input type="password" name="password" class="form-control" id="input-password" style="height: 50px; margin-bottom: 20px">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="input-oldPassword">현재 비밀번호</label>
+                            <input type="password" name="oldPassword" class="form-control" id="input-oldPassword" style="height: 50px; margin-bottom: 20px">
                         </div>
                     </div>
                     <div class="row">
@@ -37,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-primary" type="submit" style="width: 440px; height: 50px; margin-bottom: 20px; background-color: #fe62b6; border-color: #fe62b6">수정하기</button>
+                            <button class="btn btn-primary" type="submit" style="width: 500px;  height: 50px; margin-bottom: 20px; background-color: #fe62b6; border-color: #fe62b6">수정하기</button>
                         </div>
                     </div>
                 </form>

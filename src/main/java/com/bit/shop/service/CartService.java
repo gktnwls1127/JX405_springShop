@@ -53,4 +53,12 @@ public class CartService {
     public void memberCartDel(int memberId) {
         session.delete(NAMESPACE + ".memberCartDel", memberId);
     }
+
+    public void ordered(int id) {
+        session.update(NAMESPACE + ".ordered", id);
+    }
+
+    public int orderedCount(int id){
+        return session.selectOne(NAMESPACE + ".countOrdered", id);
+    }
 }

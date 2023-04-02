@@ -8,7 +8,7 @@ public class CartDTO {
     private int memberId;
     private int productId;
     private int productCount;
-    private String order;
+    private String ordered;
     private String name;
     private String image;
     private int price;

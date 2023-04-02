@@ -23,6 +23,10 @@
         SELECT * FROM cart
         WHERE id = #{id}
     </select>
+    <select id="countOrdered" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM cart
+        WHERE memberId = #{id} AND ordered != 'ordered'
+    </select>
     <insert id="cartInsert" parameterType="cartDTO">
         INSERT INTO cart (memberId, productId, product_count)
         VALUES(#{memberId}, #{productId}, #{productCount})
@@ -30,6 +34,11 @@
     <update id="cartUpdate" parameterType="cartDTO">
         UPDATE cart
         SET product_count = #{productCount}
+        WHERE id = #{id}
+    </update>
+    <update id="ordered" parameterType="int">
+        UPDATE cart
+        SET ordered = 'ordered'
         WHERE id = #{id}
     </update>
     <delete id="cartDelete" parameterType="int">

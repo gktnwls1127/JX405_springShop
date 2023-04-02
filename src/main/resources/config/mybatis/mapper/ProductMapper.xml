@@ -6,9 +6,12 @@
     <resultMap id="product" type="productDTO">
         <result property="sellerName" column="nickname"/>
     </resultMap>
-    <select id="selectAll" resultType="productDTO">
+    <select id="selectAll" resultType="productDTO" parameterType="hashmap">
         SELECT * FROM product
-        ORDER BY id DESC
+        INNER JOIN category
+        ON product.categoryId = category.id
+        ORDER BY product.id DESC
+        LIMIT ${start}, ${size}
     </select>
     <select id="selectNew" resultType="productDTO">
         SELECT * FROM product
@@ -68,6 +71,10 @@
         DELETE FROM product
         WHERE id = #{id}
     </delete>
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+    </select>
     <select id="count" resultType="int" parameterType="int">
         SELECT COUNT(*)
         FROM product

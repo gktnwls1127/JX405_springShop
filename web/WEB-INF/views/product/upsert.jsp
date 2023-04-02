@@ -16,7 +16,16 @@
                 <form action="/product/upsert" method="post" enctype="multipart/form-data">
                     <div class="row  align-items-center">
                         <div class="col-4">
-                            <div class="select_img" style="margin: 20px"><img src=""/></div>
+                            <div class="select_img" style="margin: 20px">
+                                <c:choose>
+                                    <c:when test="${product.image eq null}">
+                                        <span>사진을 등록해주세요</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src=""/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
                         <div class="col">
                             <div class="row mb-3">

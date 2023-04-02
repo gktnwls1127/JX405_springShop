@@ -7,6 +7,7 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
+        <typeAlias type="com.bit.shop.model.BuyingDTO" alias="buyingDTO"/>
         <typeAlias type="com.bit.shop.model.CartDTO" alias="cartDTO"/>
         <typeAlias type="com.bit.shop.model.FavoriteDTO" alias="favoriteDTO"/>
         <typeAlias type="com.bit.shop.model.CategoryDTO" alias="categoryDTO"/>
@@ -14,6 +15,7 @@
         <typeAlias type="com.bit.shop.model.ProductDTO" alias="productDTO"/>
     </typeAliases>
     <mappers>
+        <mapper resource="config/mybatis/mapper/BuyingMapper.xml"/>
         <mapper resource="config/mybatis/mapper/CartMapper.xml"/>
         <mapper resource="config/mybatis/mapper/FavoriteMapper.xml"/>
         <mapper resource="config/mybatis/mapper/CategoryMapper.xml"/>

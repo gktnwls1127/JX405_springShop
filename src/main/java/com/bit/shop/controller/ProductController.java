@@ -84,7 +84,7 @@ public class ProductController {
     @GetMapping("update/{id}")
     public String showUpdate(HttpSession session, RedirectAttributes redirectAttributes, Model model, @PathVariable int id) {
         MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
-        if (!logIn.getRole().equals("ROLE_SELLER")) {
+        if (!logIn.getRole().equals("ROLE_SELLER") || !logIn.getRole().equals("ROLE_ADMIN")) {
             redirectAttributes.addFlashAttribute("message", "접근이 불가한 페이지입니다.");
             return "redirect:/";
         }
@@ -100,7 +100,7 @@ public class ProductController {
         return "/product/upsert";
     }
 
-    @GetMapping("search")
+    @GetMapping("searchPage")
     public String search(String keyword, Model model) {
         Map<String, Object> map = productService.searchItems(keyword);
 
@@ -144,6 +144,18 @@ public class ProductController {
         model.addAttribute("pagingAddr", "/product/productList/" + id);
 
         return "product/productList";
+    }
+
+    @GetMapping("delete/{id}")
+    public String delete(HttpSession session, RedirectAttributes redirectAttributes, @PathVariable int id){
+        MemberDTO logIn = (MemberDTO) session.getAttribute("logIn");
+        if (!logIn.getRole().equals("ROLE_SELLER") || !logIn.getRole().equals("ROLE_ADMIN")) {
+            redirectAttributes.addFlashAttribute("message", "접근이 불가한 페이지입니다.");
+            return "redirect:/";
+        }
+
+        productService.delete(id);
+        return "redirect:/";
     }
 
     private HashMap<String, Integer> setPages(int pageNo, int totalPage) {

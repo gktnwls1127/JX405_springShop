@@ -171,7 +171,7 @@
                             </button>
                         </div>
                         <div>
-                            <button class="btn btn-danger delete" onclick="location.href='/product/delete'">Delete
+                            <button class="btn btn-danger delete" onclick="location.href='/product/delete/${items.id}'">Delete
                             </button>
                         </div>
                     </td>

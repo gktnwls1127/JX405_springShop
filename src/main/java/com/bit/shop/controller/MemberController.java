@@ -1,6 +1,7 @@
 package com.bit.shop.controller;
 
 import com.bit.shop.model.MemberDTO;
+import com.bit.shop.model.ProductDTO;
 import com.bit.shop.service.MemberService;
 import com.bit.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member/")
@@ -71,10 +73,31 @@ public class MemberController {
 
         return "/member/myPage";
     }
-
     @GetMapping("update/{id}")
-    public String showUpdate(@PathVariable int id){
+    public String showUpdate( @PathVariable int id, Model model){
+        model.addAttribute("result", memberService.selectOne(id));
         return "member/update";
+    }
+
+    @PostMapping("update")
+    public String update(RedirectAttributes redirectAttributes, MemberDTO memberDTO, String oldPassword){
+        System.out.println(oldPassword);
+        if (memberDTO.getPassword() == oldPassword){
+            memberDTO.setPassword(memberDTO.getPassword());
+            memberDTO.setNickname(memberDTO.getNickname());
+            memberService.update(memberDTO);
+            return "member/update";
+        } else {
+            redirectAttributes.addFlashAttribute("message", "수정에 실패하였습니다.");
+            return "redirect:/";
+        }
+
+
+    }
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable int id){
+        memberService.delete(id);
+        return "redirect:/";
     }
 
     @GetMapping("cart/{id}")

@@ -29,9 +29,11 @@ public class ProductService {
         return session.selectList(NAMESPACE + ".selectBest");
     }
 
-
-    public List<ProductDTO> selectAll(){
-        return session.selectList(NAMESPACE + ".selectAll");
+    public List<ProductDTO> selectAll(int pageNo){
+        HashMap<String, Integer> params = new HashMap<>();
+        params.put("start", (pageNo-1) * PAGE_SIZE);
+        params.put("size", PAGE_SIZE);
+        return session.selectList(NAMESPACE + ".selectAll", params);
     }
     public List<ProductDTO> selectSeller(int id, int pageNo){
         HashMap<String, Integer> params = new HashMap<>();
@@ -63,6 +65,15 @@ public class ProductService {
 
     public int selectLastPage(int id){
         int count = session.selectOne(NAMESPACE + ".count", id);
+        int total = count / PAGE_SIZE;
+        if (count % PAGE_SIZE != 0){
+            total++;
+        }
+        return total;
+    }
+
+    public int selectLastPageAll(){
+        int count = session.selectOne(NAMESPACE + ".countAll");
         int total = count / PAGE_SIZE;
         if (count % PAGE_SIZE != 0){
             total++;

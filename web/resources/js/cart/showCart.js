@@ -202,14 +202,43 @@ function deleteAll() {
 function buyButton(){
     let checkRows = $("[name='check']:checked");
     let formData = []
+
     checkRows.each((index, element) => {
         let cartId = $(element).closest('td').find('.cartId').val();
-        let totalPrice = $('.totalPrice').text();
-        let productCount  = $(element).closest('td').find('.productCount').text();
+        let totalPrice = $('.sumPrice').text().replace('원', '').replace(",", "");
         let productId = $(element).closest('td').find('.productId').val();
-        let productPrice = $(element).closest('td').find('.cartPrice_input').val();
-
+        let memberId = $(element).closest('td').find('.cartMemberId').val();
+        formData.push({"memberId" : memberId, "cartId": cartId, "totalPrice" : totalPrice, "productId" : productId})
 
     })
+
+    $.ajax({
+        url: "/order/buy",
+        type: "POST",
+        data: {cart : JSON.stringify(formData)},
+        traditional : true,
+        success: (response) => {
+            if (response == "success") {
+                Swal.fire({
+                    title: "성공",
+                    text: "구매가 완료되었습니다.",
+                    icon: "success"
+                }).then(() => {
+                    location.reload()
+                })
+            } else {
+                Swal.fire({
+                    title: "!!! ERROR !!!",
+                    text: "구매가 실패하였습니다.",
+                    icon: "error"
+                }).then(() => {
+                    location.href='/cart/payPage'
+                })
+
+            }
+        }
+    })
+
+    console.log(formData)
 
 }
